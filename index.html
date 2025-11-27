@@ -258,7 +258,7 @@
           <span class="tag">粉絲專頁</span>
         </h3>
         <p class="task-desc">
-          先按上方粉專「讚 / 分享」，再點「標記完成」更新進度。
+          先按上方粉專「讚」，再點「標記完成」更新進度。
         </p>
         <div class="fb-box">
           <div
@@ -268,7 +268,7 @@
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="true"
+            data-share="false"
           ></div>
         </div>
         <div class="btn-group">
@@ -296,7 +296,7 @@
           <span class="tag">粉絲專頁</span>
         </h3>
         <p class="task-desc">
-          先完成粉專按讚 / 分享，再按「標記完成」。
+          先完成粉專按讚，再按「標記完成」。
         </p>
         <div class="fb-box">
           <div
@@ -306,7 +306,7 @@
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="true"
+            data-share="false"
           ></div>
         </div>
         <div class="btn-group">
@@ -334,7 +334,7 @@
           <span class="tag">粉絲專頁</span>
         </h3>
         <p class="task-desc">
-          完成粉專按讚 / 分享後，點「標記完成」更新任務進度。
+          完成粉專按讚後，點「標記完成」更新任務進度。
         </p>
         <div class="fb-box">
           <div
@@ -344,7 +344,7 @@
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="true"
+            data-share="false"
           ></div>
         </div>
         <div class="btn-group">
@@ -382,7 +382,7 @@
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="true"
+            data-share="false"
           ></div>
         </div>
         <div class="btn-group">
@@ -430,7 +430,7 @@
       if (bar) bar.style.width = percent + "%";
       if (text) text.textContent = `已完成 ${done} / ${total} 個任務`;
 
-      // 這裡假設：1 個任務 = 1 張抽獎券，你可以依活動規則調整
+      // 這裡假設：1 個任務 = 1 張抽獎券
       const tickets = done;
       if (ticketInfo) {
         ticketInfo.textContent = `建議獲得抽獎券：${tickets} 張`;
