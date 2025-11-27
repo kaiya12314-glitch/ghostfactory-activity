@@ -82,12 +82,6 @@
       transition: width 0.2s ease-out;
     }
 
-    .progress-detail {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #9ca3af;
-    }
-
     /* 任務卡片 */
     .tasks-grid {
       display: grid;
@@ -215,8 +209,9 @@
     }
   </style>
 </head>
+
 <body>
-  <!-- FB Root & SDK（整頁只要一次） -->
+  <!-- FB Root & SDK -->
   <div id="fb-root"></div>
   <script
     async
@@ -229,7 +224,7 @@
     <div class="title">社群任務進度</div>
     <div class="subtitle">
       完成任務後，請點「標記完成」，上方進度條會更新，<br />
-      工作人員可依畫面判斷建議抽獎券張數。
+      工作人員可依畫面判斷完成度。
     </div>
 
     <!-- 進度條 -->
@@ -243,222 +238,148 @@
       <div class="progress-bar">
         <div class="progress-inner" id="progressBar"></div>
       </div>
-      <div class="progress-detail" id="ticketInfo">
-        建議獲得抽獎券：0 張
-      </div>
     </div>
 
     <!-- 任務列表 -->
     <div class="tasks-grid">
-      <!-- 任務 1：Ghost factory 粉專 -->
+
+      <!-- 任務 1 -->
       <div class="task-card" data-task-id="ghost">
         <div class="task-pill">任務一</div>
         <h3 class="task-title">
-          按讚 Ghost factory 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          按讚 Ghost factory 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">
-          先按上方粉專「讚」，再點「標記完成」更新進度。
-        </p>
+        <p class="task-desc">先按讚，再點「標記完成」。</p>
+
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-like"
             data-href="https://www.facebook.com/GhostXFactory"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"
-          ></div>
+            data-share="false">
+          </div>
         </div>
+
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('ghost')">
-            標記完成
-          </button>
-          <a
-            class="btn-link"
-            href="https://www.facebook.com/GhostXFactory"
-            target="_blank"
-          >
-            打開粉專
-          </a>
-        </div>
-        <div class="task-hint">
-          ※ 此按鈕僅為標記畫面用，不會自動偵測是否真的按讚。
+          <button class="btn-mark" onclick="toggleTask('ghost')">標記完成</button>
+          <a class="btn-link" href="https://www.facebook.com/GhostXFactory" target="_blank">打開粉專</a>
         </div>
       </div>
 
-      <!-- 任務 2：SIXIS 粉專 -->
+      <!-- 任務 2（已換新網址） -->
       <div class="task-card" data-task-id="sixis">
         <div class="task-pill">任務二</div>
         <h3 class="task-title">
-          按讚 SIXIS 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          按讚 SIXIS 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">
-          先完成粉專按讚，再按「標記完成」。
-        </p>
+        <p class="task-desc">先按讚，再點「標記完成」。</p>
+
         <div class="fb-box">
-          <div
-            class="fb-like"
-            data-href="https://www.facebook.com/profile.php?id=61583960499909"
+          <div class="fb-like"
+            data-href="https://www.facebook.com/6sixis"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"
-          ></div>
+            data-share="false">
+          </div>
         </div>
+
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('sixis')">
-            標記完成
-          </button>
-          <a
-            class="btn-link"
-            href="https://www.facebook.com/profile.php?id=61583960499909"
-            target="_blank"
-          >
-            打開粉專
-          </a>
-        </div>
-        <div class="task-hint">
-          ※ 完成與否以現場工作人員實際確認為準。
+          <button class="btn-mark" onclick="toggleTask('sixis')">標記完成</button>
+          <a class="btn-link" href="https://www.facebook.com/6sixis" target="_blank">打開粉專</a>
         </div>
       </div>
 
-      <!-- 任務 3：AwesomeMotor88 粉專 -->
+      <!-- 任務 3 -->
       <div class="task-card" data-task-id="awesome">
         <div class="task-pill">任務三</div>
         <h3 class="task-title">
-          按讚 亞丞車業 AwesomeMotor88 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          按讚 亞丞車業 AwesomeMotor88 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">
-          完成粉專按讚後，點「標記完成」更新任務進度。
-        </p>
+        <p class="task-desc">按讚後，點「標記完成」。</p>
+
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-like"
             data-href="https://www.facebook.com/AwesomeMotor88"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"
-          ></div>
+            data-share="false">
+          </div>
         </div>
+
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('awesome')">
-            標記完成
-          </button>
-          <a
-            class="btn-link"
-            href="https://www.facebook.com/AwesomeMotor88"
-            target="_blank"
-          >
-            打開粉專
-          </a>
-        </div>
-        <div class="task-hint">
-          ※ 建議：每完成 1 項，可視為 1 張社群任務抽獎券。
+          <button class="btn-mark" onclick="toggleTask('awesome')">標記完成</button>
+          <a class="btn-link" href="https://www.facebook.com/AwesomeMotor88" target="_blank">打開粉專</a>
         </div>
       </div>
 
-      <!-- 任務 4：Fiddle 158 社團 -->
+      <!-- 任務 4 -->
       <div class="task-card" data-task-id="fiddle">
         <div class="task-pill">任務四</div>
         <h3 class="task-title">
-          加入 Fiddle 158 社團
-          <span class="tag">社團</span>
+          加入 Fiddle 158 社團 <span class="tag">社團</span>
         </h3>
-        <p class="task-desc">
-          申請加入社團並通過審核後，可點「標記完成」更新畫面。
-        </p>
+        <p class="task-desc">加入社團後，點「標記完成」。</p>
+
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-like"
             data-href="https://www.facebook.com/groups/1078978110962415"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"
-          ></div>
+            data-share="false">
+          </div>
         </div>
+
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('fiddle')">
-            標記完成
-          </button>
-          <a
-            class="btn-link"
-            href="https://www.facebook.com/groups/1078978110962415"
-            target="_blank"
-          >
-            打開社團
-          </a>
-        </div>
-        <div class="task-hint">
-          ※ 建議：全部 4 項完成，可視為活動二完整資格。
+          <button class="btn-mark" onclick="toggleTask('fiddle')">標記完成</button>
+          <a class="btn-link" href="https://www.facebook.com/groups/1078978110962415" target="_blank">打開社團</a>
         </div>
       </div>
+
     </div>
 
     <div class="note">
-      ▲ 本頁面僅提供「視覺標記與建議張數」，<br />
-      實際抽獎券發放以現場工作人員及活動辦法為主。
+      ▲ 本頁面僅供標記與檢視完成度，實際資格以工作人員為準。
     </div>
   </div>
 
   <script>
-    // 任務狀態：true = 完成
-    const taskState = {
-      ghost: false,
-      sixis: false,
-      awesome: false,
-      fiddle: false,
-    };
+    const taskState = { ghost:false, sixis:false, awesome:false, fiddle:false };
 
     function updateProgress() {
       const total = Object.keys(taskState).length;
-      const done = Object.values(taskState).filter(Boolean).length;
+      const done  = Object.values(taskState).filter(Boolean).length;
       const percent = (done / total) * 100;
 
-      const bar = document.getElementById("progressBar");
-      const text = document.getElementById("progressText");
-      const ticketInfo = document.getElementById("ticketInfo");
-
-      if (bar) bar.style.width = percent + "%";
-      if (text) text.textContent = `已完成 ${done} / ${total} 個任務`;
-
-      // 這裡假設：1 個任務 = 1 張抽獎券
-      const tickets = done;
-      if (ticketInfo) {
-        ticketInfo.textContent = `建議獲得抽獎券：${tickets} 張`;
-      }
+      document.getElementById("progressBar").style.width = percent + "%";
+      document.getElementById("progressText").textContent =
+        `已完成 ${done} / ${total} 個任務`;
     }
 
     function toggleTask(id) {
-      const newValue = !taskState[id];
-      taskState[id] = newValue;
+      taskState[id] = !taskState[id];
 
       const card = document.querySelector(`.task-card[data-task-id="${id}"]`);
-      if (card) {
-        const btn = card.querySelector(".btn-mark");
-        if (btn) {
-          if (newValue) {
-            btn.classList.add("done");
-            btn.textContent = "已完成 ✅";
-          } else {
-            btn.classList.remove("done");
-            btn.textContent = "標記完成";
-          }
-        }
+      const btn  = card.querySelector(".btn-mark");
+
+      if (taskState[id]) {
+        btn.classList.add("done");
+        btn.textContent = "已完成 ✓";
+      } else {
+        btn.classList.remove("done");
+        btn.textContent = "標記完成";
       }
 
       updateProgress();
     }
 
-    // 初始化進度
     updateProgress();
   </script>
 </body>
