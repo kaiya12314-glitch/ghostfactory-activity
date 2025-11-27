@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>活動任務｜按讚 / 追蹤 / 加入 / 分享</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
+        "Microsoft JhengHei", sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    .page {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .header-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .header-sub {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .note-box {
+      background: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      padding: 10px 12px;
+      font-size: 13px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+    }
+    .note-box b {
+      display: block;
+      margin-bottom: 4px;
+      color: #0d47a1;
+    }
+
+    /* 進度條區 */
+    .progress-box {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+      margin-bottom: 16px;
+    }
+    .progress-text-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+    .progress-label {
+      font-weight: 700;
+      color: #1565c0;
+    }
+    .progress-count {
+      font-weight: 700;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #ddd;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      width: 0%;
+      background: #42a5f5;
+      border-radius: 999px;
+      transition: width 0.3s ease;
+    }
+
+    /* 任務卡片 */
+    .section-title {
+      margin: 16px 0 10px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #444;
+    }
+    .card-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      display: flex;
+      gap: 10px;
+      border: 2px solid transparent;
+      transition: 0.2s;
+    }
+    .card.completed {
+      border-color: #66bb6a;
+      background: #f1f8e9;
+    }
+    .card-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #e0e0e0;
+      font-weight: 700;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-content {
+      flex: 1;
+    }
+    .card-title-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .card-tag {
+      background: #e3f2fd;
+      color: #1565c0;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+    }
+    .card-desc {
+      font-size: 12px;
+      color: #666;
+      margin-bottom: 8px;
+    }
+    .card-fb {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 8px;
+    }
+
+    .toggle-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+    }
+    .task-btn {
+      padding: 5px 12px;
+      border-radius: 999px;
+      border: 1px solid #666;
+      background: #fff;
+      font-size: 12px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .task-btn.done {
+      background: #43a047;
+      border-color: #2e7d32;
+      color: #fff;
+    }
+    .task-status {
+      font-size: 11px;
+      color: #999;
+    }
+    .task-status.done {
+      color: #2e7d32;
+      font-weight: 700;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="fb-root"></div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="header-title">活動任務｜按讚 / 追蹤 / 加入 / 分享</div>
+    <div class="header-sub">
+      完成以下任務後，本頁面會顯示完成進度，<br>請出示給現場人員確認即可獲得抽獎資格。
+    </div>
+  </div>
+
+  <!-- 說明 -->
+  <div class="note-box">
+    <b>操作說明</b>
+    ✔「粉專按讚」會自動勾選任務完成<br>
+    ✔ 其他任務可手動按「標記完成」<br>
+    ✔ 最終以現場人員確認為準
+  </div>
+
+  <!-- 進度條 -->
+  <div class="progress-box">
+    <div class="progress-text-row">
+      <div class="progress-label">任務進度</div>
+      <div class="progress-count" id="progress-count">0 / 5</div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-bar-inner" id="progress-bar-inner"></div>
+    </div>
+  </div>
+
+  <!-- 粉絲專頁任務 -->
+  <div class="section-title">粉絲專頁任務</div>
+
+  <div class="card-list">
+
+    <!-- 1 Awesome Motor -->
+    <div class="card" data-task-id="awesome" data-like-url="https://www.facebook.com/AwesomeMotor88">
+      <div class="card-icon">A</div>
+      <div class="card-content">
+        <div class="card-title-row">
+          <div class="card-title">Awesome Motor 粉絲專頁</div>
+          <div class="card-tag">粉專</div>
+        </div>
+        <div class="card-desc">請按讚並追蹤我們的粉專。</div>
+
+        <div class="card-fb">
+          <div class="fb-like"
+            data-href="https://www.facebook.com/AwesomeMotor88"
+            data-layout="button"
+            data-action="like"
+            data-size="small"></div>
+
+          <div class="fb-follow"
+            data-href="https://www.facebook.com/AwesomeMotor88"
+            data-layout="button"
+            data-size="small"></div>
+        </div>
+
+        <div class="toggle-wrap">
+          <button class="task-btn" data-task-btn>標記完成</button>
+          <span class="task-status" data-task-status>尚未完成</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 Ghost factory -->
+    <div class="card" data-task-id="ghost" data-like-url="https://www.facebook.com/GhostXFactory">
+      <div class="card-icon">G</div>
+      <div class="card-content">
+        <div class="card-title-row">
+          <div class="card-title">Ghost factory 粉絲專頁</div>
+          <div class="card-tag">粉專</div>
+        </div>
+        <div class="card-desc">按讚支持 Ghost factory。</div>
+
+        <div class="card-fb">
+          <div class="fb-like"
+            data-href="https://www.facebook.com/GhostXFactory"
+            data-layout="button"
+            data-action="like"
+            data-size="small"></div>
+
+          <div class="fb-follow"
+            data-href="https://www.facebook.com/GhostXFactory"
+            data-layout="button"
+            data-size="small"></div>
+        </div>
+
+        <div class="toggle-wrap">
+          <button class="task-btn" data-task-btn>標記完成</button>
+          <span class="task-status" data-task-status>尚未完成</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 SIXIS -->
+    <div class="card" data-task-id="sixis" data-like-url="https://www.facebook.com/6sixis">
+      <div class="card-icon">S</div>
+      <div class="card-content">
+        <div class="card-title-row">
+          <div class="card-title">SIXIS 粉絲專頁</div>
+          <div class="card-tag">粉專</div>
+        </div>
+        <div class="card-desc">追蹤 SIXIS 新品與活動資訊。</div>
+
+        <div class="card-fb">
+          <div class="fb-like"
+            data-href="https://www.facebook.com/6sixis"
+            data-layout="button"
+            data-action="like"
+            data-size="small"></div>
+
+          <div class="fb-follow"
+            data-href="https://www.facebook.com/6sixis"
+            data-layout="button"
+            data-size="small"></div>
+        </div>
+
+        <div class="toggle-wrap">
+          <button class="task-btn" data-task-btn>標記完成</button>
+          <span class="task-status" data-task-status>尚未完成</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- 社團任務 -->
+  <div class="section-title">社團任務</div>
+  <div class="card" data-task-id="group">
+    <div class="card-icon">社</div>
+    <div class="card-content">
+      <div class="card-title-row">
+        <div class="card-title">Fiddle 158 社團</div>
+        <div class="card-tag">社團</div>
+      </div>
+      <div class="card-desc">加入 Fiddle 158 社團。</div>
+
+      <div class="card-fb">
+        <div class="fb-group"
+          data-href="https://www.facebook.com/groups/1078978110962415"
+          data-width="320"
+          data-show-social-context="true"
+          data-show-metadata="false"></div>
+      </div>
+
+      <div class="toggle-wrap">
+        <button class="task-btn" data-task-btn>標記完成</button>
+        <span class="task-status" data-task-status>尚未完成</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 分享任務 -->
+  <div class="section-title">活動貼文分享（任務）</div>
+  <div class="card" data-task-id="share">
+    <div class="card-icon">文</div>
+    <div class="card-content">
+      <div class="card-title-row">
+        <div class="card-title">FB 活動貼文分享</div>
+        <div class="card-tag">分享</div>
+      </div>
+
+      <div class="card-desc">
+        請前往活動貼文按讚並分享至個人塗鴉牆。
+      </div>
+
+      <div class="card-fb">
+        <!-- 活動貼文網址：發布後把 data-href="#" 改成實際貼文 -->
+        <div class="fb-share-button"
+          data-href="#"
+          data-layout="button"></div>
+      </div>
+
+      <div class="toggle-wrap">
+        <button class="task-btn" data-task-btn>標記完成</button>
+        <span class="task-status" data-task-status>尚未完成</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    ※ 本頁為任務進度紀錄，最終依現場人員確認為準。
+  </div>
+</div>
+
+<!-- 任務 + FB 事件 JS -->
+<script>
+  // 進度 & 手動勾選邏輯
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".card[data-task-id]");
+    const totalTasks = cards.length;
+    const progressCount = document.getElementById("progress-count");
+    const progressBarInner = document.getElementById("progress-bar-inner");
+
+    function updateProgress() {
+      const done = document.querySelectorAll(".card.completed").length;
+      progressCount.textContent = done + " / " + totalTasks;
+      progressBarInner.style.width = (done / totalTasks * 100) + "%";
+    }
+
+    cards.forEach(card => {
+      const btn = card.querySelector("[data-task-btn]");
+      const status = card.querySelector("[data-task-status]");
+      if (!btn || !status) return;
+
+      btn.addEventListener("click", function () {
+        const isDone = card.classList.toggle("completed");
+        btn.classList.toggle("done", isDone);
+
+        if (isDone) {
+          btn.textContent = "已完成";
+          status.textContent = "已完成";
+          status.classList.add("done");
+        } else {
+          btn.textContent = "標記完成";
+          status.textContent = "尚未完成";
+          status.classList.remove("done");
+        }
+        updateProgress();
+      });
+    });
+
+    updateProgress();
+  });
+
+  // 工具：網址正規化（去掉最後的 /）
+  function normalizeUrl(url) {
+    if (!url) return "";
+    return url.replace(/\/+$/, "");
+  }
+
+  // 按讚 → 自動完成任務
+  function autoCompleteLikeTask(url) {
+    const norm = normalizeUrl(url);
+    const cards = document.querySelectorAll(".card[data-like-url]");
+    cards.forEach(card => {
+      const likeUrl = normalizeUrl(card.getAttribute("data-like-url"));
+      if (likeUrl && likeUrl === norm) {
+        const btn = card.querySelector("[data-task-btn]");
+        if (!btn) return;
+        if (!card.classList.contains("completed")) {
+          btn.click(); // 直接觸發原本的切換邏輯
+        }
+      }
+    });
+  }
+
+  //（可選）取消讚 → 自動取消任務
+  function autoUncompleteLikeTask(url) {
+    const norm = normalizeUrl(url);
+    const cards = document.querySelectorAll(".card[data-like-url]");
+    cards.forEach(card => {
+      const likeUrl = normalizeUrl(card.getAttribute("data-like-url"));
+      if (likeUrl && likeUrl === norm) {
+        const btn = card.querySelector("[data-task-btn]");
+        if (!btn) return;
+        if (card.classList.contains("completed")) {
+          btn.click();
+        }
+      }
+    });
+  }
+
+  // FB SDK 初始化 & 事件訂閱（一定要在載入 SDK 之前宣告）
+  window.fbAsyncInit = function () {
+    FB.init({
+      xfbml: true,
+      version: "v17.0"
+    });
+
+    // 按讚事件
+    FB.Event.subscribe("edge.create", function (url, htmlElement) {
+      autoCompleteLikeTask(url);
+    });
+
+    // 如果要取消讚自動取消勾選，可以打開這段
+    /*
+    FB.Event.subscribe("edge.remove", function (url, htmlElement) {
+      autoUncompleteLikeTask(url);
+    });
+    */
+  };
+
+  // 正式載入 SDK（官方推薦寫法）
+  (function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) { return; }
+    js = d.createElement(s);
+    js.id = id;
+    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, "script", "facebook-jssdk"));
+</script>
+
+</body>
+</html>
