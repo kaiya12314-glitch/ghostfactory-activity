@@ -130,7 +130,13 @@
     }
 
     .fb-box {
-      margin: 4px 0 4px;
+      margin: 6px 0 4px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .fb-page {
+      max-width: 100%;
     }
 
     .btn-group {
@@ -202,46 +208,16 @@
   </style>
 </head>
 <body>
-  <!-- FB Root + SDK 載入（用 fbAsyncInit，方便註冊事件） -->
+  <!-- FB Root & SDK（支援 fb-page 外掛） -->
   <div id="fb-root"></div>
-  <script>
-    window.fbAsyncInit = function () {
-      FB.init({
-        xfbml: true,
-        version: "v19.0",
-      });
-
-      // 監聽 Like 成功事件（edge.create）
-      FB.Event.subscribe("edge.create", function (url) {
-        // console.log("liked:", url);
-        if (url.indexOf("GhostXFactory") !== -1) {
-          markTaskDone("ghost");   // 任務一
-        } else if (url.indexOf("6sixis") !== -1) {
-          markTaskDone("sixis");   // 任務二
-        } else if (url.indexOf("AwesomeMotor88") !== -1) {
-          markTaskDone("awesome"); // 任務三
-        } else if (url.indexOf("1078978110962415") !== -1) {
-          markTaskDone("fiddle");  // 任務四（社團）
-        }
-      });
-    };
-
-    (function (d, s, id) {
-      var js,
-        fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s);
-      js.id = id;
-      js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, "script", "facebook-jssdk");
-  </script>
+  <script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v19.0"></script>
 
   <div class="page">
     <div class="title">社群任務進度</div>
     <div class="subtitle">
-      在下方粉專 / 社團按讚（或加入），<br />
-      之後按鈕會自動變成「已完成」，工作人員可依畫面判斷完成度。
+      下方粉專 / 社團會顯示按讚人數與朋友資訊，<br />
+      完成後請點「標記完成」，工作人員可依畫面判斷完成度。
     </div>
 
     <!-- 進度條 -->
@@ -259,24 +235,27 @@
 
     <!-- 任務列表 -->
     <div class="tasks-grid">
-      <!-- 任務一 -->
+      <!-- 任務一：Ghost factory -->
       <div class="task-card" data-task-id="ghost">
         <div class="task-pill">任務一</div>
         <h3 class="task-title">
-          按讚 Ghost factory 粉絲專頁 <span class="tag">粉絲專頁</span>
+          按讚 Ghost factory 粉絲專頁
+          <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚後，按鈕會自動變成「已完成」，也可手動點擊。</p>
+        <p class="task-desc">
+          下方外掛會顯示「說這個讚」的人數與朋友資訊，按讚後可點「標記完成」。
+        </p>
 
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-page"
             data-href="https://www.facebook.com/GhostXFactory"
-            data-width=""
-            data-layout="standard"
-            data-action="like"
-            data-size="large"
-            data-share="false"
-          ></div>
+            data-tabs=""
+            data-width="320"
+            data-height=""
+            data-hide-cover="false"
+            data-show-facepile="true"
+            data-small-header="false">
+          </div>
         </div>
 
         <div class="btn-group">
@@ -285,24 +264,27 @@
         </div>
       </div>
 
-      <!-- 任務二 -->
+      <!-- 任務二：SIXIS -->
       <div class="task-card" data-task-id="sixis">
         <div class="task-pill">任務二</div>
         <h3 class="task-title">
-          按讚 SIXIS 粉絲專頁 <span class="tag">粉絲專頁</span>
+          按讚 SIXIS 粉絲專頁
+          <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚後會自動標記完成，必要時也可手動按。</p>
+        <p class="task-desc">
+          外掛會顯示你和其他人都說這個讚（若已登入 Facebook），完成後點「標記完成」。
+        </p>
 
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-page"
             data-href="https://www.facebook.com/6sixis"
-            data-width=""
-            data-layout="standard"
-            data-action="like"
-            data-size="large"
-            data-share="false"
-          ></div>
+            data-tabs=""
+            data-width="320"
+            data-height=""
+            data-hide-cover="false"
+            data-show-facepile="true"
+            data-small-header="false">
+          </div>
         </div>
 
         <div class="btn-group">
@@ -311,24 +293,27 @@
         </div>
       </div>
 
-      <!-- 任務三 -->
+      <!-- 任務三：AwesomeMotor88 -->
       <div class="task-card" data-task-id="awesome">
         <div class="task-pill">任務三</div>
         <h3 class="task-title">
-          按讚 亞丞車業 AwesomeMotor88 粉絲專頁 <span class="tag">粉絲專頁</span>
+          按讚 亞丞車業 AwesomeMotor88 粉絲專頁
+          <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚成功後，本任務會自動完成。</p>
+        <p class="task-desc">
+          可在外掛中看到粉專按讚人數，按完後點「標記完成」更新進度。
+        </p>
 
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-page"
             data-href="https://www.facebook.com/AwesomeMotor88"
-            data-width=""
-            data-layout="standard"
-            data-action="like"
-            data-size="large"
-            data-share="false"
-          ></div>
+            data-tabs=""
+            data-width="320"
+            data-height=""
+            data-hide-cover="false"
+            data-show-facepile="true"
+            data-small-header="false">
+          </div>
         </div>
 
         <div class="btn-group">
@@ -337,24 +322,27 @@
         </div>
       </div>
 
-      <!-- 任務四 -->
+      <!-- 任務四：Fiddle 158 社團 -->
       <div class="task-card" data-task-id="fiddle">
         <div class="task-pill">任務四</div>
         <h3 class="task-title">
-          加入 Fiddle 158 社團 <span class="tag">社團</span>
+          加入 Fiddle 158 社團
+          <span class="tag">社團</span>
         </h3>
-        <p class="task-desc">按讚 / 追蹤社團後，按鈕也會自動變「已完成」。</p>
+        <p class="task-desc">
+          外掛會顯示社團資訊，加入後可點「標記完成」，由工作人員確認為準。
+        </p>
 
         <div class="fb-box">
-          <div
-            class="fb-like"
+          <div class="fb-page"
             data-href="https://www.facebook.com/groups/1078978110962415"
-            data-width=""
-            data-layout="standard"
-            data-action="like"
-            data-size="large"
-            data-share="false"
-          ></div>
+            data-tabs=""
+            data-width="320"
+            data-height=""
+            data-hide-cover="false"
+            data-show-facepile="true"
+            data-small-header="false">
+          </div>
         </div>
 
         <div class="btn-group">
@@ -365,14 +353,13 @@
     </div>
 
     <div class="note">
-      ▲ 本頁面只能偵測「在這個畫面按下讚」的動作，<br />
-      無法查詢歷史有沒有按過讚，實際資格仍以工作人員確認為主。
+      ▲ Facebook 外掛中的「你和其他 xxx 人都說這個讚」是由 Facebook 自行顯示，<br />
+      本頁無法讀取或驗證，實際資格仍以工作人員確認為主。
     </div>
   </div>
 
   <script>
-    // 任務狀態
-    const taskState = { ghost: false, sixis: false, awesome: false, fiddle: false };
+    const taskState = { ghost:false, sixis:false, awesome:false, fiddle:false };
 
     function updateProgress() {
       const total   = Object.keys(taskState).length;
@@ -384,26 +371,11 @@
         `已完成 ${done} / ${total} 個任務`;
     }
 
-    // 按鈕點擊：切換狀態
     function toggleTask(id) {
       taskState[id] = !taskState[id];
-      renderTaskButton(id);
-      updateProgress();
-    }
 
-    // 給 FB Like 事件用：只設成「完成」，不會切回未完成
-    function markTaskDone(id) {
-      if (taskState[id]) return;        // 已完成就不重複
-      taskState[id] = true;
-      renderTaskButton(id);
-      updateProgress();
-    }
-
-    function renderTaskButton(id) {
       const card = document.querySelector(`.task-card[data-task-id="${id}"]`);
-      if (!card) return;
       const btn  = card.querySelector(".btn-mark");
-      if (!btn) return;
 
       if (taskState[id]) {
         btn.classList.add("done");
@@ -412,6 +384,8 @@
         btn.classList.remove("done");
         btn.textContent = "標記完成";
       }
+
+      updateProgress();
     }
 
     updateProgress();
