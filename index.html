@@ -133,13 +133,6 @@
       margin: 4px 0 4px;
     }
 
-    .mobile-like-hint {
-      font-size: 11px;
-      color: #9ca3af;
-      margin-top: 2px;
-      display: none; /* 預設桌機不顯示 */
-    }
-
     .btn-group {
       display: flex;
       align-items: center;
@@ -201,16 +194,6 @@
       line-height: 1.6;
     }
 
-    @media (max-width: 640px) {
-      /* 手機：隱藏 FB Like 外掛，只顯示提示文字與「打開粉專」 */
-      .fb-box {
-        display: none;
-      }
-      .mobile-like-hint {
-        display: block;
-      }
-    }
-
     @media (max-width: 480px) {
       .title {
         font-size: 20px;
@@ -219,16 +202,46 @@
   </style>
 </head>
 <body>
-  <!-- FB SDK：桌機會用到 Like 外掛 -->
+  <!-- FB Root + SDK 載入（用 fbAsyncInit，方便註冊事件） -->
   <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v19.0"></script>
+  <script>
+    window.fbAsyncInit = function () {
+      FB.init({
+        xfbml: true,
+        version: "v19.0",
+      });
+
+      // 監聽 Like 成功事件（edge.create）
+      FB.Event.subscribe("edge.create", function (url) {
+        // console.log("liked:", url);
+        if (url.indexOf("GhostXFactory") !== -1) {
+          markTaskDone("ghost");   // 任務一
+        } else if (url.indexOf("6sixis") !== -1) {
+          markTaskDone("sixis");   // 任務二
+        } else if (url.indexOf("AwesomeMotor88") !== -1) {
+          markTaskDone("awesome"); // 任務三
+        } else if (url.indexOf("1078978110962415") !== -1) {
+          markTaskDone("fiddle");  // 任務四（社團）
+        }
+      });
+    };
+
+    (function (d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "https://connect.facebook.net/zh_TW/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "facebook-jssdk");
+  </script>
 
   <div class="page">
     <div class="title">社群任務進度</div>
     <div class="subtitle">
-      先到各粉專 / 社團按讚或加入，<br />
-      回到本頁按「標記完成」，工作人員即可依畫面判斷完成度。
+      在下方粉專 / 社團按讚（或加入），<br />
+      之後按鈕會自動變成「已完成」，工作人員可依畫面判斷完成度。
     </div>
 
     <!-- 進度條 -->
@@ -252,21 +265,18 @@
         <h3 class="task-title">
           按讚 Ghost factory 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚後，回到本頁點「標記完成」。</p>
+        <p class="task-desc">按讚後，按鈕會自動變成「已完成」，也可手動點擊。</p>
 
-        <!-- 桌機版 FB Like 外掛 -->
         <div class="fb-box">
-          <div class="fb-like"
+          <div
+            class="fb-like"
             data-href="https://www.facebook.com/GhostXFactory"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"></div>
-        </div>
-        <!-- 手機提示 -->
-        <div class="mobile-like-hint">
-          ※ 若上方沒有顯示按讚按鈕或按了沒反應，請直接點「打開粉專」在 Facebook App 內按讚。
+            data-share="false"
+          ></div>
         </div>
 
         <div class="btn-group">
@@ -281,19 +291,18 @@
         <h3 class="task-title">
           按讚 SIXIS 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚後，回到本頁點「標記完成」。</p>
+        <p class="task-desc">按讚後會自動標記完成，必要時也可手動按。</p>
 
         <div class="fb-box">
-          <div class="fb-like"
+          <div
+            class="fb-like"
             data-href="https://www.facebook.com/6sixis"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"></div>
-        </div>
-        <div class="mobile-like-hint">
-          ※ 手機若按讚沒反應，請點「打開粉專」，在 Facebook App 裡按讚即可。
+            data-share="false"
+          ></div>
         </div>
 
         <div class="btn-group">
@@ -308,19 +317,18 @@
         <h3 class="task-title">
           按讚 亞丞車業 AwesomeMotor88 粉絲專頁 <span class="tag">粉絲專頁</span>
         </h3>
-        <p class="task-desc">按讚後，回到本頁點「標記完成」。</p>
+        <p class="task-desc">按讚成功後，本任務會自動完成。</p>
 
         <div class="fb-box">
-          <div class="fb-like"
+          <div
+            class="fb-like"
             data-href="https://www.facebook.com/AwesomeMotor88"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"></div>
-        </div>
-        <div class="mobile-like-hint">
-          ※ 若無法在本頁按讚，請改用「打開粉專」在 Facebook 內操作。
+            data-share="false"
+          ></div>
         </div>
 
         <div class="btn-group">
@@ -335,19 +343,18 @@
         <h3 class="task-title">
           加入 Fiddle 158 社團 <span class="tag">社團</span>
         </h3>
-        <p class="task-desc">加入社團通過審核後，回到本頁點「標記完成」。</p>
+        <p class="task-desc">按讚 / 追蹤社團後，按鈕也會自動變「已完成」。</p>
 
         <div class="fb-box">
-          <div class="fb-like"
+          <div
+            class="fb-like"
             data-href="https://www.facebook.com/groups/1078978110962415"
             data-width=""
             data-layout="standard"
             data-action="like"
             data-size="large"
-            data-share="false"></div>
-        </div>
-        <div class="mobile-like-hint">
-          ※ 社團建議直接點「打開社團」，在 Facebook App 中加入。
+            data-share="false"
+          ></div>
         </div>
 
         <div class="btn-group">
@@ -358,12 +365,14 @@
     </div>
 
     <div class="note">
-      ▲ 本頁面僅供標記與檢視完成度，實際資格與抽獎券張數以工作人員為準。
+      ▲ 本頁面只能偵測「在這個畫面按下讚」的動作，<br />
+      無法查詢歷史有沒有按過讚，實際資格仍以工作人員確認為主。
     </div>
   </div>
 
   <script>
-    const taskState = { ghost:false, sixis:false, awesome:false, fiddle:false };
+    // 任務狀態
+    const taskState = { ghost: false, sixis: false, awesome: false, fiddle: false };
 
     function updateProgress() {
       const total   = Object.keys(taskState).length;
@@ -375,11 +384,26 @@
         `已完成 ${done} / ${total} 個任務`;
     }
 
+    // 按鈕點擊：切換狀態
     function toggleTask(id) {
       taskState[id] = !taskState[id];
+      renderTaskButton(id);
+      updateProgress();
+    }
 
+    // 給 FB Like 事件用：只設成「完成」，不會切回未完成
+    function markTaskDone(id) {
+      if (taskState[id]) return;        // 已完成就不重複
+      taskState[id] = true;
+      renderTaskButton(id);
+      updateProgress();
+    }
+
+    function renderTaskButton(id) {
       const card = document.querySelector(`.task-card[data-task-id="${id}"]`);
+      if (!card) return;
       const btn  = card.querySelector(".btn-mark");
+      if (!btn) return;
 
       if (taskState[id]) {
         btn.classList.add("done");
@@ -388,8 +412,6 @@
         btn.classList.remove("done");
         btn.textContent = "標記完成";
       }
-
-      updateProgress();
     }
 
     updateProgress();
