@@ -31,10 +31,22 @@
       text-align: center;
       font-size: 14px;
       color: #9ca3af;
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       line-height: 1.5;
     }
 
+    .notice-box {
+      background: rgba(55, 65, 81, 0.4);
+      border-left: 4px solid #f59e0b;
+      padding: 10px 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      border-radius: 6px;
+      margin-bottom: 22px;
+      color: #fcd34d;
+    }
+
+    /* 進度條區塊 */
     .progress-card {
       background: rgba(15, 23, 42, 0.95);
       border-radius: 16px;
@@ -81,6 +93,7 @@
       transition: width 0.2s ease-out;
     }
 
+    /* 任務卡片 */
     .tasks-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -129,22 +142,12 @@
       margin: 0;
     }
 
-    .fb-box {
-      margin: 6px 0 4px;
-      max-width: 100%;
-      overflow: hidden;
-    }
-
-    .fb-page {
-      max-width: 100%;
-    }
-
     .btn-group {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-top: 6px;
+      margin-top: 8px;
     }
 
     .btn-mark {
@@ -161,33 +164,23 @@
       white-space: nowrap;
     }
 
-    .btn-mark:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(248, 181, 0, 0.4);
-      filter: brightness(1.03);
-    }
-
     .btn-mark.done {
       background: #16a34a;
       color: #ecfdf5;
       box-shadow: 0 10px 25px rgba(22, 163, 74, 0.35);
     }
 
-    .btn-mark.done:hover {
-      box-shadow: 0 16px 30px rgba(22, 163, 74, 0.45);
-    }
-
     .btn-link {
       border: none;
       border-radius: 999px;
-      padding: 7px 12px;
+      padding: 7px 14px;
       font-size: 12px;
       cursor: pointer;
       background: rgba(31, 41, 55, 0.9);
       color: #e5e7eb;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -207,17 +200,20 @@
     }
   </style>
 </head>
-<body>
-  <!-- FB Root & SDK（支援 fb-page 外掛） -->
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous"
-    src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v19.0"></script>
 
+<body>
   <div class="page">
     <div class="title">社群任務進度</div>
+
     <div class="subtitle">
-      下方粉專 / 社團會顯示按讚人數與朋友資訊，<br />
-      完成後請點「標記完成」，工作人員可依畫面判斷完成度。
+      這是<strong>手機專用</strong>任務頁面，  
+      前往粉專按讚後，回到此頁點「標記完成」即可。
+    </div>
+
+    <div class="notice-box">
+      📌 <b>注意（現場抽查制度）</b><br>
+      完成任務後請點擊「標記完成」更新畫面。<br>
+      現場人員可能會要求您打開 Facebook App 以確認按讚或加入社團。
     </div>
 
     <!-- 進度條 -->
@@ -235,126 +231,72 @@
 
     <!-- 任務列表 -->
     <div class="tasks-grid">
-      <!-- 任務一：Ghost factory -->
+
+      <!-- 任務 1 -->
       <div class="task-card" data-task-id="ghost">
         <div class="task-pill">任務一</div>
         <h3 class="task-title">
-          按讚 Ghost factory 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          Ghost factory 粉絲專頁
+          <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">
-          下方外掛會顯示「說這個讚」的人數與朋友資訊，按讚後可點「標記完成」。
-        </p>
-
-        <div class="fb-box">
-          <div class="fb-page"
-            data-href="https://www.facebook.com/GhostXFactory"
-            data-tabs=""
-            data-width="320"
-            data-height=""
-            data-hide-cover="false"
-            data-show-facepile="true"
-            data-small-header="false">
-          </div>
-        </div>
+        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('ghost')">標記完成</button>
           <a class="btn-link" href="https://www.facebook.com/GhostXFactory" target="_blank">打開粉專</a>
+          <button class="btn-mark" onclick="toggleTask('ghost')">標記完成</button>
         </div>
       </div>
 
-      <!-- 任務二：SIXIS -->
+      <!-- 任務 2 -->
       <div class="task-card" data-task-id="sixis">
         <div class="task-pill">任務二</div>
         <h3 class="task-title">
-          按讚 SIXIS 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          SIXIS 粉絲專頁
+          <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">
-          外掛會顯示你和其他人都說這個讚（若已登入 Facebook），完成後點「標記完成」。
-        </p>
-
-        <div class="fb-box">
-          <div class="fb-page"
-            data-href="https://www.facebook.com/6sixis"
-            data-tabs=""
-            data-width="320"
-            data-height=""
-            data-hide-cover="false"
-            data-show-facepile="true"
-            data-small-header="false">
-          </div>
-        </div>
+        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('sixis')">標記完成</button>
           <a class="btn-link" href="https://www.facebook.com/6sixis" target="_blank">打開粉專</a>
+          <button class="btn-mark" onclick="toggleTask('sixis')">標記完成</button>
         </div>
       </div>
 
-      <!-- 任務三：AwesomeMotor88 -->
+      <!-- 任務 3 -->
       <div class="task-card" data-task-id="awesome">
         <div class="task-pill">任務三</div>
         <h3 class="task-title">
-          按讚 亞丞車業 AwesomeMotor88 粉絲專頁
-          <span class="tag">粉絲專頁</span>
+          亞丞車業 AwesomeMotor88
+          <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">
-          可在外掛中看到粉專按讚人數，按完後點「標記完成」更新進度。
-        </p>
-
-        <div class="fb-box">
-          <div class="fb-page"
-            data-href="https://www.facebook.com/AwesomeMotor88"
-            data-tabs=""
-            data-width="320"
-            data-height=""
-            data-hide-cover="false"
-            data-show-facepile="true"
-            data-small-header="false">
-          </div>
-        </div>
+        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('awesome')">標記完成</button>
           <a class="btn-link" href="https://www.facebook.com/AwesomeMotor88" target="_blank">打開粉專</a>
+          <button class="btn-mark" onclick="toggleTask('awesome')">標記完成</button>
         </div>
       </div>
 
-      <!-- 任務四：Fiddle 158 社團 -->
+      <!-- 任務 4 -->
       <div class="task-card" data-task-id="fiddle">
         <div class="task-pill">任務四</div>
         <h3 class="task-title">
-          加入 Fiddle 158 社團
-          <span class="tag">社團</span>
+          Fiddle 158 社團
+          <span class="tag">社團任務</span>
         </h3>
-        <p class="task-desc">
-          外掛會顯示社團資訊，加入後可點「標記完成」，由工作人員確認為準。
-        </p>
-
-        <div class="fb-box">
-          <div class="fb-page"
-            data-href="https://www.facebook.com/groups/1078978110962415"
-            data-tabs=""
-            data-width="320"
-            data-height=""
-            data-hide-cover="false"
-            data-show-facepile="true"
-            data-small-header="false">
-          </div>
-        </div>
+        <p class="task-desc">加入社團後，回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
-          <button class="btn-mark" onclick="toggleTask('fiddle')">標記完成</button>
           <a class="btn-link" href="https://www.facebook.com/groups/1078978110962415" target="_blank">打開社團</a>
+          <button class="btn-mark" onclick="toggleTask('fiddle')">標記完成</button>
         </div>
       </div>
+
     </div>
 
     <div class="note">
-      ▲ Facebook 外掛中的「你和其他 xxx 人都說這個讚」是由 Facebook 自行顯示，<br />
-      本頁無法讀取或驗證，實際資格仍以工作人員確認為主。
+      ▲ 本頁面不會自動驗證是否按讚，<br>
+      實際任務完成與抽獎券張數以現場工作人員抽查為主。
     </div>
   </div>
 
@@ -362,8 +304,8 @@
     const taskState = { ghost:false, sixis:false, awesome:false, fiddle:false };
 
     function updateProgress() {
-      const total   = Object.keys(taskState).length;
-      const done    = Object.values(taskState).filter(Boolean).length;
+      const total = Object.keys(taskState).length;
+      const done = Object.values(taskState).filter(Boolean).length;
       const percent = (done / total) * 100;
 
       document.getElementById("progressBar").style.width = percent + "%";
@@ -375,7 +317,7 @@
       taskState[id] = !taskState[id];
 
       const card = document.querySelector(`.task-card[data-task-id="${id}"]`);
-      const btn  = card.querySelector(".btn-mark");
+      const btn = card.querySelector(".btn-mark");
 
       if (taskState[id]) {
         btn.classList.add("done");
