@@ -8,8 +8,8 @@
   <style>
     * {
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
-        "Microsoft JhengHei", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Noto Sans TC", "Microsoft JhengHei", sans-serif;
     }
     body {
       margin: 0;
@@ -50,7 +50,7 @@
       color: #0d47a1;
     }
 
-    /* 進度條區 */
+    /* 進度條 */
     .progress-box {
       background: #ffffff;
       border-radius: 10px;
@@ -124,9 +124,6 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .card-content {
-      flex: 1;
-    }
     .card-title-row {
       display: flex;
       justify-content: space-between;
@@ -159,7 +156,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      margin-top: 6px;
     }
     .task-btn {
       padding: 5px 12px;
@@ -209,8 +205,8 @@
   <!-- 說明 -->
   <div class="note-box">
     <b>操作說明</b>
-    ✔「粉專按讚」會自動勾選任務完成<br>
-    ✔ 其他任務可手動按「標記完成」<br>
+    ✔ FB 操作請實際按下按鈕<br>
+    ✔ 任務完成請按「標記完成」<br>
     ✔ 最終以現場人員確認為準
   </div>
 
@@ -218,7 +214,7 @@
   <div class="progress-box">
     <div class="progress-text-row">
       <div class="progress-label">任務進度</div>
-      <div class="progress-count" id="progress-count">0 / 5</div>
+      <div class="progress-count" id="progress-count">0 / 6</div>
     </div>
     <div class="progress-bar">
       <div class="progress-bar-inner" id="progress-bar-inner"></div>
@@ -231,7 +227,7 @@
   <div class="card-list">
 
     <!-- 1 Awesome Motor -->
-    <div class="card" data-task-id="awesome" data-like-url="https://www.facebook.com/AwesomeMotor88">
+    <div class="card" data-task-id="awesome">
       <div class="card-icon">A</div>
       <div class="card-content">
         <div class="card-title-row">
@@ -241,16 +237,8 @@
         <div class="card-desc">請按讚並追蹤我們的粉專。</div>
 
         <div class="card-fb">
-          <div class="fb-like"
-            data-href="https://www.facebook.com/AwesomeMotor88"
-            data-layout="button"
-            data-action="like"
-            data-size="small"></div>
-
-          <div class="fb-follow"
-            data-href="https://www.facebook.com/AwesomeMotor88"
-            data-layout="button"
-            data-size="small"></div>
+          <div class="fb-like" data-href="https://www.facebook.com/AwesomeMotor88" data-layout="button" data-action="like"></div>
+          <div class="fb-follow" data-href="https://www.facebook.com/AwesomeMotor88" data-layout="button"></div>
         </div>
 
         <div class="toggle-wrap">
@@ -260,27 +248,19 @@
       </div>
     </div>
 
-    <!-- 2 Ghost factory -->
-    <div class="card" data-task-id="ghost" data-like-url="https://www.facebook.com/GhostXFactory">
+    <!-- 2 Ghost Factory -->
+    <div class="card" data-task-id="ghost">
       <div class="card-icon">G</div>
       <div class="card-content">
         <div class="card-title-row">
-          <div class="card-title">Ghost factory 粉絲專頁</div>
+          <div class="card-title">Ghost Factory 粉絲專頁</div>
           <div class="card-tag">粉專</div>
         </div>
-        <div class="card-desc">按讚支持 Ghost factory。</div>
+        <div class="card-desc">按讚支持 Ghost Factory。</div>
 
         <div class="card-fb">
-          <div class="fb-like"
-            data-href="https://www.facebook.com/GhostXFactory"
-            data-layout="button"
-            data-action="like"
-            data-size="small"></div>
-
-          <div class="fb-follow"
-            data-href="https://www.facebook.com/GhostXFactory"
-            data-layout="button"
-            data-size="small"></div>
+          <div class="fb-like" data-href="https://www.facebook.com/GhostXFactory" data-layout="button" data-action="like"></div>
+          <div class="fb-follow" data-href="https://www.facebook.com/GhostXFactory" data-layout="button"></div>
         </div>
 
         <div class="toggle-wrap">
@@ -291,26 +271,40 @@
     </div>
 
     <!-- 3 SIXIS -->
-    <div class="card" data-task-id="sixis" data-like-url="https://www.facebook.com/6sixis">
+    <div class="card" data-task-id="sixis">
       <div class="card-icon">S</div>
       <div class="card-content">
         <div class="card-title-row">
           <div class="card-title">SIXIS 粉絲專頁</div>
           <div class="card-tag">粉專</div>
         </div>
-        <div class="card-desc">追蹤 SIXIS 新品與活動資訊。</div>
+        <div class="card-desc">追蹤 SIXIS 最新資訊。</div>
 
         <div class="card-fb">
-          <div class="fb-like"
-            data-href="https://www.facebook.com/6sixis"
-            data-layout="button"
-            data-action="like"
-            data-size="small"></div>
+          <div class="fb-like" data-href="https://www.facebook.com/6sixis" data-layout="button" data-action="like"></div>
+          <div class="fb-follow" data-href="https://www.facebook.com/6sixis" data-layout="button"></div>
+        </div>
 
-          <div class="fb-follow"
-            data-href="https://www.facebook.com/6sixis"
-            data-layout="button"
-            data-size="small"></div>
+        <div class="toggle-wrap">
+          <button class="task-btn" data-task-btn>標記完成</button>
+          <span class="task-status" data-task-status>尚未完成</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 新粉專 -->
+    <div class="card" data-task-id="newpage">
+      <div class="card-icon">N</div>
+      <div class="card-content">
+        <div class="card-title-row">
+          <div class="card-title">官方粉絲專頁（新任務）</div>
+          <div class="card-tag">粉專</div>
+        </div>
+        <div class="card-desc">請按讚並追蹤此粉專。</div>
+
+        <div class="card-fb">
+          <div class="fb-like" data-href="https://www.facebook.com/profile.php?id=61583960499909" data-layout="button" data-action="like"></div>
+          <div class="fb-follow" data-href="https://www.facebook.com/profile.php?id=61583960499909" data-layout="button"></div>
         </div>
 
         <div class="toggle-wrap">
@@ -322,8 +316,9 @@
 
   </div>
 
-  <!-- 社團任務 -->
+  <!-- 社團 -->
   <div class="section-title">社團任務</div>
+
   <div class="card" data-task-id="group">
     <div class="card-icon">社</div>
     <div class="card-content">
@@ -348,8 +343,9 @@
     </div>
   </div>
 
-  <!-- 分享任務 -->
+  <!-- 分享 -->
   <div class="section-title">活動貼文分享（任務）</div>
+
   <div class="card" data-task-id="share">
     <div class="card-icon">文</div>
     <div class="card-content">
@@ -357,13 +353,9 @@
         <div class="card-title">FB 活動貼文分享</div>
         <div class="card-tag">分享</div>
       </div>
-
-      <div class="card-desc">
-        請前往活動貼文按讚並分享至個人塗鴉牆。
-      </div>
+      <div class="card-desc">前往活動貼文 → 按讚 → 分享至個人塗鴉牆。</div>
 
       <div class="card-fb">
-        <!-- 活動貼文網址：發布後把 data-href="#" 改成實際貼文 -->
         <div class="fb-share-button"
           data-href="#"
           data-layout="button"></div>
@@ -377,117 +369,53 @@
   </div>
 
   <div class="footer">
-    ※ 本頁為任務進度紀錄，最終依現場人員確認為準。
+    ※ 本頁為任務紀錄，最終依現場人員確認為準。
   </div>
+
 </div>
 
-<!-- 任務 + FB 事件 JS -->
+<!-- FB SDK -->
+<script async defer src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v17.0"></script>
+
+<!-- 任務 JS -->
 <script>
-  // 進度 & 手動勾選邏輯
-  document.addEventListener("DOMContentLoaded", function () {
-    const cards = document.querySelectorAll(".card[data-task-id]");
-    const totalTasks = cards.length;
-    const progressCount = document.getElementById("progress-count");
-    const progressBarInner = document.getElementById("progress-bar-inner");
+document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".card[data-task-id]");
+  const totalTasks = cards.length;
+  const progressCount = document.getElementById("progress-count");
+  const progressBarInner = document.getElementById("progress-bar-inner");
 
-    function updateProgress() {
-      const done = document.querySelectorAll(".card.completed").length;
-      progressCount.textContent = done + " / " + totalTasks;
-      progressBarInner.style.width = (done / totalTasks * 100) + "%";
-    }
+  function updateProgress() {
+    const done = document.querySelectorAll(".card.completed").length;
+    progressCount.textContent = done + " / " + totalTasks;
+    progressBarInner.style.width = (done / totalTasks * 100) + "%";
+  }
 
-    cards.forEach(card => {
-      const btn = card.querySelector("[data-task-btn]");
-      const status = card.querySelector("[data-task-status]");
-      if (!btn || !status) return;
+  cards.forEach(card => {
+    const btn = card.querySelector("[data-task-btn]");
+    const status = card.querySelector("[data-task-status]");
+    if (!btn || !status) return;
 
-      btn.addEventListener("click", function () {
-        const isDone = card.classList.toggle("completed");
-        btn.classList.toggle("done", isDone);
+    btn.addEventListener("click", function () {
+      const isDone = card.classList.toggle("completed");
+      btn.classList.toggle("done", isDone);
 
-        if (isDone) {
-          btn.textContent = "已完成";
-          status.textContent = "已完成";
-          status.classList.add("done");
-        } else {
-          btn.textContent = "標記完成";
-          status.textContent = "尚未完成";
-          status.classList.remove("done");
-        }
-        updateProgress();
-      });
+      if (isDone) {
+        btn.textContent = "已完成";
+        status.textContent = "已完成";
+        status.classList.add("done");
+      } else {
+        btn.textContent = "標記完成";
+        status.textContent = "尚未完成";
+        status.classList.remove("done");
+      }
+
+      updateProgress();
     });
-
-    updateProgress();
   });
 
-  // 工具：網址正規化（去掉最後的 /）
-  function normalizeUrl(url) {
-    if (!url) return "";
-    return url.replace(/\/+$/, "");
-  }
-
-  // 按讚 → 自動完成任務
-  function autoCompleteLikeTask(url) {
-    const norm = normalizeUrl(url);
-    const cards = document.querySelectorAll(".card[data-like-url]");
-    cards.forEach(card => {
-      const likeUrl = normalizeUrl(card.getAttribute("data-like-url"));
-      if (likeUrl && likeUrl === norm) {
-        const btn = card.querySelector("[data-task-btn]");
-        if (!btn) return;
-        if (!card.classList.contains("completed")) {
-          btn.click(); // 直接觸發原本的切換邏輯
-        }
-      }
-    });
-  }
-
-  //（可選）取消讚 → 自動取消任務
-  function autoUncompleteLikeTask(url) {
-    const norm = normalizeUrl(url);
-    const cards = document.querySelectorAll(".card[data-like-url]");
-    cards.forEach(card => {
-      const likeUrl = normalizeUrl(card.getAttribute("data-like-url"));
-      if (likeUrl && likeUrl === norm) {
-        const btn = card.querySelector("[data-task-btn]");
-        if (!btn) return;
-        if (card.classList.contains("completed")) {
-          btn.click();
-        }
-      }
-    });
-  }
-
-  // FB SDK 初始化 & 事件訂閱（一定要在載入 SDK 之前宣告）
-  window.fbAsyncInit = function () {
-    FB.init({
-      xfbml: true,
-      version: "v17.0"
-    });
-
-    // 按讚事件
-    FB.Event.subscribe("edge.create", function (url, htmlElement) {
-      autoCompleteLikeTask(url);
-    });
-
-    // 如果要取消讚自動取消勾選，可以打開這段
-    /*
-    FB.Event.subscribe("edge.remove", function (url, htmlElement) {
-      autoUncompleteLikeTask(url);
-    });
-    */
-  };
-
-  // 正式載入 SDK（官方推薦寫法）
-  (function (d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) { return; }
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://connect.facebook.net/zh_TW/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, "script", "facebook-jssdk"));
+  updateProgress();
+});
 </script>
 
 </body>
