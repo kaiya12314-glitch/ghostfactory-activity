@@ -54,14 +54,14 @@
       flex-wrap: wrap;
     }
 
-    .progress-title {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
     .progress-info {
       font-size: 12px;
       color: #e5e7eb;
+    }
+
+    .progress-title {
+      font-size: 14px;
+      font-weight: 600;
     }
 
     .progress-bar {
@@ -117,7 +117,7 @@
       flex-wrap: wrap;
     }
 
-    .task-title span.tag {
+    .task-title .tag {
       font-size: 11px;
       padding: 2px 7px;
       border-radius: 999px;
@@ -149,8 +149,7 @@
       color: #111827;
       font-weight: 600;
       box-shadow: 0 10px 25px rgba(248, 181, 0, 0.35);
-      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
-      white-space: nowrap;
+      transition: 0.15s ease;
     }
 
     .btn-mark.done {
@@ -168,8 +167,6 @@
       background: rgba(31, 41, 55, 0.9);
       color: #e5e7eb;
       display: inline-flex;
-      align-items: center;
-      gap: 6px;
       text-decoration: none;
       white-space: nowrap;
     }
@@ -181,12 +178,6 @@
       text-align: center;
       line-height: 1.6;
     }
-
-    @media (max-width: 480px) {
-      .title {
-        font-size: 20px;
-      }
-    }
   </style>
 </head>
 
@@ -195,16 +186,14 @@
     <div class="title">社群任務進度</div>
 
     <div class="subtitle">
-      前往粉專按讚或加入社團後，回到本頁點「標記完成」即可。
+      前往粉專按讚、加入社團或分享貼文後，回到本頁點「標記完成」即可。
     </div>
 
     <!-- 進度條 -->
     <div class="progress-card">
       <div class="progress-header">
         <div class="progress-title">任務完成進度</div>
-        <div class="progress-info" id="progressText">
-          已完成 0 / 4 個任務
-        </div>
+        <div class="progress-info" id="progressText">已完成 0 / 5 個任務</div>
       </div>
       <div class="progress-bar">
         <div class="progress-inner" id="progressBar"></div>
@@ -218,10 +207,9 @@
       <div class="task-card" data-task-id="ghost">
         <div class="task-pill">任務一</div>
         <h3 class="task-title">
-          Ghost factory 粉絲專頁
-          <span class="tag">按讚任務</span>
+          Ghost factory 粉絲專頁 <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
+        <p class="task-desc">按讚後回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
           <a class="btn-link" href="https://www.facebook.com/GhostXFactory" target="_blank">打開粉專</a>
@@ -233,10 +221,9 @@
       <div class="task-card" data-task-id="sixis">
         <div class="task-pill">任務二</div>
         <h3 class="task-title">
-          SIXIS 粉絲專頁
-          <span class="tag">按讚任務</span>
+          SIXIS 粉絲專頁 <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
+        <p class="task-desc">按讚後回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
           <a class="btn-link" href="https://www.facebook.com/6sixis" target="_blank">打開粉專</a>
@@ -248,10 +235,9 @@
       <div class="task-card" data-task-id="awesome">
         <div class="task-pill">任務三</div>
         <h3 class="task-title">
-          亞丞車業 AwesomeMotor88
-          <span class="tag">按讚任務</span>
+          亞丞車業 AwesomeMotor88 <span class="tag">按讚任務</span>
         </h3>
-        <p class="task-desc">前往粉專按讚後，回到此頁點「標記完成」。</p>
+        <p class="task-desc">按讚後回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
           <a class="btn-link" href="https://www.facebook.com/AwesomeMotor88" target="_blank">打開粉專</a>
@@ -263,14 +249,34 @@
       <div class="task-card" data-task-id="fiddle">
         <div class="task-pill">任務四</div>
         <h3 class="task-title">
-          Fiddle 158 社團
-          <span class="tag">社團任務</span>
+          Fiddle 158 社團 <span class="tag">社團任務</span>
         </h3>
-        <p class="task-desc">加入社團後，回到此頁點「標記完成」。</p>
+        <p class="task-desc">加入後回到此頁點「標記完成」。</p>
 
         <div class="btn-group">
           <a class="btn-link" href="https://www.facebook.com/groups/1078978110962415" target="_blank">打開社團</a>
           <button class="btn-mark" onclick="toggleTask('fiddle')">標記完成</button>
+        </div>
+      </div>
+
+      <!-- 任務 5：分享＋TAG 兩位朋友 -->
+      <div class="task-card" data-task-id="share">
+        <div class="task-pill">任務五</div>
+        <h3 class="task-title">
+          分享貼文並 TAG 兩位朋友 <span class="tag">分享任務</span>
+        </h3>
+        <p class="task-desc">
+          請分享活動貼文並在貼文中 TAG 兩位好友，完成後回到此頁點「標記完成」。
+        </p>
+
+        <div class="btn-group">
+          <a class="btn-link" 
+             href="https://www.facebook.com/share/p/16ZVTnjiQy/" 
+             target="_blank">
+            打開活動貼文
+          </a>
+
+          <button class="btn-mark" onclick="toggleTask('share')">標記完成</button>
         </div>
       </div>
 
@@ -282,11 +288,17 @@
   </div>
 
   <script>
-    const taskState = { ghost:false, sixis:false, awesome:false, fiddle:false };
+    const taskState = {
+      ghost: false,
+      sixis: false,
+      awesome: false,
+      fiddle: false,
+      share: false  // 新增：分享任務
+    };
 
     function updateProgress() {
       const total = Object.keys(taskState).length;
-      const done = Object.values(taskState).filter(Boolean).length;
+      const done  = Object.values(taskState).filter(Boolean).length;
       const percent = (done / total) * 100;
 
       document.getElementById("progressBar").style.width = percent + "%";
@@ -313,5 +325,6 @@
 
     updateProgress();
   </script>
+
 </body>
 </html>
