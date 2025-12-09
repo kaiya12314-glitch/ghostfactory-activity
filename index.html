@@ -54,14 +54,14 @@
       flex-wrap: wrap;
     }
 
-    .progress-info {
-      font-size: 12px;
-      color: #e5e7eb;
-    }
-
     .progress-title {
       font-size: 14px;
       font-weight: 600;
+    }
+
+    .progress-info {
+      font-size: 12px;
+      color: #e5e7eb;
     }
 
     .progress-bar {
@@ -117,7 +117,7 @@
       flex-wrap: wrap;
     }
 
-    .task-title .tag {
+    .task-title span.tag {
       font-size: 11px;
       padding: 2px 7px;
       border-radius: 999px;
@@ -139,6 +139,19 @@
       margin-top: 8px;
     }
 
+    .btn-link {
+      border: none;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      background: rgba(31, 41, 55, 0.9);
+      color: #e5e7eb;
+      display: inline-flex;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
     .btn-mark {
       border: none;
       border-radius: 999px;
@@ -158,19 +171,6 @@
       box-shadow: 0 10px 25px rgba(22, 163, 74, 0.35);
     }
 
-    .btn-link {
-      border: none;
-      border-radius: 999px;
-      padding: 7px 14px;
-      font-size: 12px;
-      cursor: pointer;
-      background: rgba(31, 41, 55, 0.9);
-      color: #e5e7eb;
-      display: inline-flex;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
     .note {
       font-size: 11px;
       color: #6b7280;
@@ -178,11 +178,13 @@
       text-align: center;
       line-height: 1.6;
     }
+
   </style>
 </head>
 
 <body>
   <div class="page">
+
     <div class="title">社群任務進度</div>
 
     <div class="subtitle">
@@ -195,6 +197,7 @@
         <div class="progress-title">任務完成進度</div>
         <div class="progress-info" id="progressText">已完成 0 / 5 個任務</div>
       </div>
+
       <div class="progress-bar">
         <div class="progress-inner" id="progressBar"></div>
       </div>
@@ -259,19 +262,19 @@
         </div>
       </div>
 
-      <!-- 任務 5：分享＋TAG 兩位朋友 -->
+      <!-- 任務 5：分享 + TAG 兩位朋友 -->
       <div class="task-card" data-task-id="share">
         <div class="task-pill">任務五</div>
         <h3 class="task-title">
           分享貼文並 TAG 兩位朋友 <span class="tag">分享任務</span>
         </h3>
         <p class="task-desc">
-          請分享活動貼文並在貼文中 TAG 兩位好友，完成後回到此頁點「標記完成」。
+          請分享活動貼文，並在貼文中 TAG 兩位好友。完成後回到此頁點「標記完成」。
         </p>
 
         <div class="btn-group">
           <a class="btn-link" 
-             href="https://www.facebook.com/share/p/16ZVTnjiQy/" 
+             href="https://www.facebook.com/share/p/1FfFQAx4uu/" 
              target="_blank">
             打開活動貼文
           </a>
@@ -293,7 +296,7 @@
       sixis: false,
       awesome: false,
       fiddle: false,
-      share: false  // 新增：分享任務
+      share: false   // 分享任務
     };
 
     function updateProgress() {
